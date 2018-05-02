@@ -1,0 +1,1 @@
+# Vagrant CKAN package installer
