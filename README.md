@@ -1,9 +1,9 @@
 # Vagrant CKAN package installer
 
-This project should speed up testing of the CKAN packages buit with
+This project should speed up testing of the CKAN packages built with
 [ckan-packaging](https://github.com/ckan/ckan-packaging).
 
-My idea is to create multi-machine Vagrantfile to set up required enviroment
+My idea is to create multi-machine Vagrantfile to set up required enviroments:
 
     * Ubuntu 12.04 (Trusty)
     * Ubuntu 14.04 (Precise)
@@ -11,6 +11,7 @@ My idea is to create multi-machine Vagrantfile to set up required enviroment
 
 and pass CKAN package version as parameter and later to be installed by executing
 the  provsioning shell script. In future could be used Ansible.
+This script should set up CKAN as described in [docs](http://docs.ckan.org/en/latest/maintaining/installing/install-from-package.html)
 
 
 ## Usage
@@ -25,4 +26,4 @@ the  provsioning shell script. In future could be used Ansible.
   ## ToDo:
 
   * Use Ansible
-  * Change `data/provisoning.sh` with `main.yml`
+  * Change `data/provision.sh` with `main.yml`
