@@ -1,3 +1,4 @@
 .deb
 python-ckan*
 .vagrant/
+md5sum

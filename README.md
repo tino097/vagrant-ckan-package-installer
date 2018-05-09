@@ -22,6 +22,7 @@ This script should set up CKAN as described in [docs](http://docs.ckan.org/en/la
   $ vagrant up
   ```
 
+>NOTE: Use `vagrant destroy` before installing new package on same environment
 ***
   ## ToDo:
 

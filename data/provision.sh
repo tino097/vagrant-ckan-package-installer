@@ -6,7 +6,7 @@ echo "** Updating the package manager "
 sudo apt-get update
 
 echo "** Install required packages"
-sudo apt-get install -y nginx apache2 libapache2-mod-wsgi libpq5 redis-server git-core postgresql solr-jetty openjdk-7-jre
+sudo apt-get install -y nginx apache2 libapache2-mod-wsgi libpq5 redis-server git-core postgresql solr-jetty openjdk-8-jre
 
 echo "** Install CKAN"
 cd /vagrant/data/
