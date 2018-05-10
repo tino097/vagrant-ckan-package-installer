@@ -24,7 +24,37 @@ This script should set up CKAN as described in [docs](http://docs.ckan.org/en/la
 
 >NOTE: Use `vagrant destroy` before installing new package on same environment
 ***
-  ## ToDo:
 
-  * Use Ansible
-  * Change `data/provision.sh` with `main.yml`
+# Selenium Tests
+
+As part of the CKAN package installer, selenium tests are added. These tests should
+check if the package is sucessfully installed and perform basic tesing of the CKAN instance.
+
+To be able to start tests first create virtual environment with
+
+   ```
+   $ virtualenv default
+   ```
+Install `selenium`:
+   ```
+   (default)$ pip install selenium
+   ```
+
+Download webdirver, for this project im using [Chrome](https://sites.google.com/a/chromium.org/chromedriver/downloads) webdriver
+
+
+After downloading unzip it to:
+
+  ```
+  (default)$ unzip chromedriver_linux64.zip
+  ```
+Move the webdriver to `/usr/local/bin`
+
+Tests should be started by navigating to `selenium-ckan-testing` folder and install `pytests`
+
+    ```
+    (default)$ pip install pytest
+    (default)$ pytest ckan
+    ```
+
+To be continued ...
