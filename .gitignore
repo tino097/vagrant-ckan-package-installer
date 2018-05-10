@@ -4,3 +4,4 @@ python-ckan*
 md5sum
 */__pycache__/*
 .vscode/
+*.pyc
