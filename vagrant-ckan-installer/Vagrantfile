@@ -14,28 +14,31 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
 
   config.vm.define "trusty-ckan" do |trusty|
-    trusty.vm.box = "ubuntu/trusty64"
+    trusty.vm.box = "bento/ubuntu-14.04"
     trusty.vm.network "forwarded_port", guest: 80, host: 6080
     trusty.vm.network "forwarded_port", guest: 5000, host: 6050
     trusty.vm.network "forwarded_port", guest: 8983, host: 6983
     trusty.vm.network "private_network", ip: "192.168.33.10"
+    trusty.vm.provision :shell, :path => "data/trusty-provision.sh", :args => [ENV['package']]
 
   end
 
   config.vm.define "precise-ckan" do |precise|
-    precise.vm.box = "ubuntu/precise64"
+    precise.vm.box = "bento/ubuntu-12.04"
     precise.vm.network "forwarded_port", guest: 80, host: 6080
     precise.vm.network "forwarded_port", guest: 5000, host: 6050
     precise.vm.network "forwarded_port", guest: 8983, host: 6983
     precise.vm.network "private_network", ip: "192.168.33.11"
+    precise.vm.provision :shell, :path => "data/precise-provision.sh", :args => [ENV['package']]
   end
 
   config.vm.define "xenial-ckan" do |xenial|
-    xenial.vm.box = "ubuntu/xenial64"
+    xenial.vm.box = "bento/ubuntu-16.04"
     xenial.vm.network "forwarded_port", guest: 80, host: 6080
     xenial.vm.network "forwarded_port", guest: 5000, host: 6050
     xenial.vm.network "forwarded_port", guest: 8983, host: 6983
-    xenial.vm.network "private_network", ip: "192.168.33.11"
+    xenial.vm.network "private_network", ip: "192.168.33.12"
+    xenial.vm.provision :shell, :path => "data/xenial-provision.sh", :args => [ENV['package']]
   end
 
   # Disable automatic box update checking. If you disable this, then
@@ -89,7 +92,7 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision :shell, :path => "data/provision.sh", :args => [ENV['package']]
+  # config.vm.provision :shell, :path => "data/provision.sh", :args => [ENV['package']]
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL

@@ -1,0 +1,9 @@
+{
+  "ckan/datasets/test_datasets_page.py::DatasetPage::test_dataset_results_found": true,
+  "ckan/datasets/test_datasets_page.py::TestsDatasetPage": true,
+  "ckan/datasets/test_datasets_page.py::TestsDatasetPage::test_dataset_landing_page": true,
+  "ckan/datasets/test_datasets_page.py::TestsDatasetPage::test_dataset_results_found": true,
+  "ckan/test_main_page.py::CKANMainPAge": true,
+  "ckan/test_main_page.py::CKANMainPAge::test_main_page_text": true,
+  "ckan/test_main_page.py::CKANMainPAge::test_main_page_title": true
+}
