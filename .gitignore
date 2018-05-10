@@ -2,3 +2,5 @@
 python-ckan*
 .vagrant/
 md5sum
+*/__pycache__/*
+.vscode/

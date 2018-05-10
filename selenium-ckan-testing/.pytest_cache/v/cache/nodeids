@@ -1,6 +1,0 @@
-[
-  "ckan/test_main_page.py::CKANMainPAge::test_main_page_text",
-  "ckan/test_main_page.py::CKANMainPAge::test_main_page_title",
-  "ckan/datasets/test_datasets_page.py::TestsDatasetPage::test_dataset_landing_page",
-  "ckan/datasets/test_datasets_page.py::TestsDatasetPage::test_dataset_results_found"
-]
