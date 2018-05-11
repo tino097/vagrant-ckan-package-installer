@@ -2,9 +2,9 @@
 python-ckan*
 .vagrant/
 md5sum
-*/__pycache__/*
+**/__pycache__/**
 .vscode/
 *.pyc
 ../.pytest_cache/
-.pytest_cache/
-
+ .pytest_cache/
+**.pytest_cache/**
