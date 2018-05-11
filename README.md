@@ -16,10 +16,10 @@ This script should set up CKAN as described in [docs](http://docs.ckan.org/en/la
 
 ## Usage
 
-  Currently, box and CKAN package are hardcoded and should be changed by hand before starting the vagrant with:
+ When starting the vagrant box, we should provide CKAN version e.g 2.7 as argument and define which box to be started
 
-  ```
-  $ vagrant up
+  ```bash
+  $ ver='2.7' vagrant up trusty-ckan
   ```
 
 >NOTE: Use `vagrant destroy` before installing new package on same environment
