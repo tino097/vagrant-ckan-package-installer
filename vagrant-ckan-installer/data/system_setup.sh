@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 echo "SETTING UP THE SYSTEM"
 
@@ -18,14 +19,17 @@ case $release in
     precise) echo "Prepeare setup for PRECISE"
             sudo service apache2 stop
             sudo apt-get -y install nginx openjdk-7-jre
+            jety=jetty
     ;;
     trusty) echo "Prepeare setup for TRUSTY"
             sudo service apache2 stop
             sudo apt-get -y install nginx openjdk-7-jre
+            jety=jetty
     ;;
     xenial) echo "Prepeare setup for XENIAL"
             sudo service apache2 stop
             sudo apt-get -y install nginx openjdk-8-jre
+            jety=jetty8
     ;;
 esac
 
@@ -41,6 +45,7 @@ package=`printf "python-ckan_%s-%s_amd64.deb" "$1" "$release"`
 if [! -f $package]; then
    echo " *** CKAN package is missing!!!"
 else
+   sudo chmod a+x $package
    sudo dpkg -i $package
 fi
 
@@ -55,24 +60,28 @@ else
     sudo -u postgres createdb -O ckan_default ckan_default -E utf-8
 fi
 
-if [ -f /etc/default/jetty ]; then
-    echo "** Eedit solr jetty coinfiguration"
-    sed -i "s/NO_START=1/NO_START=0/" /etc/default/jetty
-    sed -i "s/#JETTY_HOST=\$(uname -n)/JETTY_HOST=127\.0\.0\.1/" /etc/default/jetty
-    sed -i "s/#JETTY_PORT=8080/JETTY_PORT=8983/" /etc/default/jetty
+echo "** Edit solr jetty coinfiguration"
+
+if [ -f /etc/default/$jety ]; then
+    sudo sed -i "s/NO_START=1/NO_START=0/g" /etc/default/$jety
+    sudo sed -i "s/#JETTY_HOST=\$(uname -n)/JETTY_HOST=127\.0\.0\.1/g" /etc/default/$jety
+    sudo sed -i "s/#JETTY_PORT=8080/JETTY_PORT=8983/g" /etc/default/$jety
 else
    echo "Please reinstall SOLR!!!"
+fi
 
 sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
 sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
 
-sudo service jetty restart
-sudo service jetty status
+sudo service $jety restart
+sudo service $jety status
 
 echo "** Set up production.ini"
-sed -i "s/ckan.site_url =/ckan.site_url = http:\/\/192\.168\.33\.10/g" /etc/ckan/default/production.ini
-sed -i "s/#solr_url = http:\/\/127\.0\.0\.1:8983\/solr/solr_url = http:\/\/127\.0\.0\.1:8983\/solr/g" /etc/ckan/default/production.ini
-sed -i "s/#ckan.storage_path = \/var\/lib\/ckan/ckan.storage_path = \/var\/lib\/ckan\/default/g" /etc/ckan/default/production.ini
+host=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
+
+sudo sed -i "s/ckan.site_url =/ckan.site_url = http:\/\/$host/g" /etc/ckan/default/production.ini
+sudo sed -i "s/#solr_url = http:\/\/127\.0\.0\.1:8983\/solr/solr_url = http:\/\/127\.0\.0\.1:8983\/solr/g" /etc/ckan/default/production.ini
+sudo sed -i "s/#ckan.storage_path = \/var\/lib\/ckan/ckan.storage_path = \/var\/lib\/ckan\/default/g" /etc/ckan/default/production.ini
 
 echo "** Enable filestore"
 sudo mkdir -p /var/lib/ckan/default

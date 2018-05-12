@@ -7,4 +7,4 @@ md5sum
 *.pyc
 ../.pytest_cache/
  .pytest_cache/
-**.pytest_cache/**
+**/.pytest_cache/**
