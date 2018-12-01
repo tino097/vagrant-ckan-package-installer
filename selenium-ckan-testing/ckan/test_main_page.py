@@ -7,7 +7,7 @@ class TestCKANMainPAge(object):
     def setUp(self):
         self.driver = webdriver.Chrome()
         try:
-            self.driver.get("http://192.168.33.10")
+            self.driver.get("http://192.168.33.12")
         except Exception as e:
             print(e.message)
 
