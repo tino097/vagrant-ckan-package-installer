@@ -40,9 +40,9 @@ echo "** Install CKAN"
 cd /vagrant/data/
 
 echo $release
-package=`printf "python-ckan_%s-%s_amd64.deb" "$1" "$release"`
+package=`printf "python-ckan_%s-%s1_amd64.deb" "$1" "$release"`
 
-if [! -f $package]; then
+if [ ! -f $package ]; then
    echo " *** CKAN package is missing!!!"
 else
    sudo chmod a+x $package
@@ -85,8 +85,8 @@ sudo sed -i "s/#ckan.storage_path = \/var\/lib\/ckan/ckan.storage_path = \/var\/
 
 echo "** Enable filestore"
 sudo mkdir -p /var/lib/ckan/default
-sudo chown www-data /var/lib/ckan/default
-sudo chmod u+rwx /var/lib/ckan/default
+sudo chown www-data /var/lib/ckan/default/
+sudo chmod 777 -R /var/lib/ckan/default/
 
 echo "** Initialize database"
 sudo ckan db init
@@ -105,5 +105,5 @@ echo "** Restart Services **"
 sudo service apache2 restart
 sudo service nginx restart
 
-echo "** Enjoy the coffie with your freshly installe CKAN istance"
+echo "** Enjoy the coffie with your freshly installed CKAN istance"
 
